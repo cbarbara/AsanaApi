@@ -1,0 +1,40 @@
+@model  Website.Models.Projects.ProjectsListModel
+@{
+	ViewBag.Title = "Asana API ";
+}
+
+@section featured {
+<section class="featured">
+	<div class="content-wrapper">
+		<hgroup class="title">
+			<h1>@ViewBag.Title.</h1>
+			<h2>@ViewBag.Message</h2>
+		</hgroup>
+	</div>
+</section>
+}
+Hello there <em>@(Website.Shared.Me.Name)</em>.<br />
+These are all your Projects.
+
+<ul>
+@for( int i = 0; i < Model.Projects.Length; i++ )
+{
+	<li data-project-id="@(Model.Projects[ i ].Id)">
+		<div>
+			@if( i == Model.DefaultProjectIndex ) 
+		    {
+				@:Name: @(Model.Projects[ i ].Name)<em style="color:Red">*</em>
+		    }
+			else
+			{
+				@:Name: @Html.ActionLink( Model.Projects[ i ].Name, "ChangeDefaultProject", new { i }, null )
+			}
+			<br />
+			Created: @(Model.Projects[ i ].CreatedAt.ToString( "o" )) <br />
+			Last Modified: @(Model.Projects[ i ].ModifiedAt.HasValue ? Model.Projects[ i ].ModifiedAt.Value.ToString( "o" ) : "")
+		</div>
+	</li>
+}
+</ul>
+<br />
+<em style="color:Red">*</em> - Is your default Project for most other views. To change it click on any of the other Project names.

@@ -1,0 +1,55 @@
+@model  Website.Models.Tasks.TasksListModel
+@{
+	ViewBag.Title = "Asana API ";
+}
+
+@section featured {
+<section class="featured">
+	<div class="content-wrapper">
+		<hgroup class="title">
+			<h1>@ViewBag.Title.</h1>
+			<h2>@ViewBag.Message</h2>
+		</hgroup>
+	</div>
+</section>
+}
+Hello there <em>@(Website.Shared.Me.Name)</em>.<br />
+These are all your Tasks for the Project <em>@(Model.ProjectName)</em>.
+
+<ul>
+@if( @Model.ShowCompleteTaskDetails )
+{
+	foreach( var task in Model.Tasks )
+	{
+		<li data-task-id="@(task.Id)">
+			<div>
+				Name: @(task.Name) - @Html.ActionLink( "Stories", "TaskStories", "Stories", new { id = task.Id }, null )<br />
+				Created: @(task.CreatedAt.ToString("o")) <br />
+				Assigned To: @(task.Assignee == null ? "" : task.Assignee.Name)<br />
+				Last Modified: @(task.ModifiedAt.HasValue ? task.ModifiedAt.Value.ToString("o") : "" )<br />
+				Status: @(task.AssigneeStatus.HasValue ? task.AssigneeStatus.Value.ToString() : "")<br />
+				@(task.Completed ? "Compeleted At: " + task.CompletedAt.Value.ToString("o") : " ... In Progress ... ")<br/>
+			</div>
+		</li>
+	 }
+}
+else
+{ 
+	foreach( var task in Model.Tasks )
+	{
+		<li data-task-id="@(task.Id)">@(task.Name) - @Html.ActionLink( "Stories", "TaskStories", "Stories", new { id = task.Id }, null )</li>
+	}
+}
+</ul>
+
+<br />
+@if( Model.ShowCompleteTaskDetails == false )
+{ 
+	@:Want to see more details for these tasks? @Html.ActionLink( "Click Here", "Index", new { option = "True" }, null ).
+}
+else
+{
+	@:Hide the details for these tasks? <a href="/Tasks">Click Here</a>.
+}
+<br />
+Change your Project on the @Html.ActionLink("Projects Page", "Index","Projects").

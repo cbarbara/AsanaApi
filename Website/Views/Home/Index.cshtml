@@ -1,0 +1,35 @@
+@{
+    ViewBag.Title = "Asana API ";
+}
+
+@section featured {
+<section class="featured">
+    <div class="content-wrapper">
+        <hgroup class="title">
+            <h1>@ViewBag.Title.</h1>
+            <h2>@ViewBag.Message</h2>
+        </hgroup>
+    </div>
+</section>
+}
+
+Hello there <em>@(Website.Shared.Me.Name)</em>.<br />
+
+<ol class="round">
+    <li class="one">
+        <h5>View Tasks</h5>
+        @Html.ActionLink( "Tasks", "Index", "Tasks" )
+    </li>
+    <li class="two">
+        <h5>View Users</h5>
+        @Html.ActionLink( "Users", "Index", "Users" )
+    </li>
+    <li class="three">
+        <h5>Projects</h5>
+        @Html.ActionLink( "Projects", "Index", "Projects" )
+    </li>
+	<li class="four">
+        <h5>Workspaces</h5>
+        @Html.ActionLink( "Workspaces", "Index", "Workspaces" )
+    </li>
+</ol>

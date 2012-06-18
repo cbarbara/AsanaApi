@@ -1,0 +1,24 @@
+@model  Website.Models.Workspaces.WorkspacesListModel
+@{
+	ViewBag.Title = "Asana API ";
+}
+
+@section featured {
+<section class="featured">
+	<div class="content-wrapper">
+		<hgroup class="title">
+			<h1>@ViewBag.Title.</h1>
+			<h2>@ViewBag.Message</h2>
+		</hgroup>
+	</div>
+</section>
+}
+Hello there <em>@(Website.Shared.Me.Name)</em>.<br />
+These are all your Workspaces.
+
+<ul>
+@foreach( var workspace in Model.Workspaces )
+{
+	<li data-workspace-id="@(workspace.Id)">@(workspace.Name)</li>
+}
+</ul>

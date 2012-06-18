@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Website\Website.csproj", "{73B28B91-C49F-4B36-B7CF-C0E6C8994486}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsanaApi", "AsanaApi\AsanaApi.csproj", "{3A261803-E7CA-4F47-B216-F559660869FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsanaApi.Tests", "AsanaApi.Tests\AsanaApi.Tests.csproj", "{40E31301-EA74-45F4-BBA8-0EFE93B33825}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73B28B91-C49F-4B36-B7CF-C0E6C8994486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73B28B91-C49F-4B36-B7CF-C0E6C8994486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73B28B91-C49F-4B36-B7CF-C0E6C8994486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73B28B91-C49F-4B36-B7CF-C0E6C8994486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A261803-E7CA-4F47-B216-F559660869FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A261803-E7CA-4F47-B216-F559660869FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A261803-E7CA-4F47-B216-F559660869FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A261803-E7CA-4F47-B216-F559660869FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40E31301-EA74-45F4-BBA8-0EFE93B33825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40E31301-EA74-45F4-BBA8-0EFE93B33825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40E31301-EA74-45F4-BBA8-0EFE93B33825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40E31301-EA74-45F4-BBA8-0EFE93B33825}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

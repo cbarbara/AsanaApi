@@ -1,0 +1,32 @@
+@model  Website.Models.Stories.TaskStoriesListModel
+@{
+	ViewBag.Title = "Asana API ";
+}
+
+@section featured {
+<section class="featured">
+	<div class="content-wrapper">
+		<hgroup class="title">
+			<h1>@ViewBag.Title.</h1>
+			<h2>@ViewBag.Message</h2>
+		</hgroup>
+	</div>
+</section>
+}
+Here is the story for the Task <strong>@(Model.Task.Name)</strong>:<br />
+Created: @(Model.Task.CreatedAt.ToString( "o" )) <br />
+Assigned To: @(Model.Task.Assignee == null ? "" : Model.Task.Assignee.Name)<br />
+Last Modified: @(Model.Task.ModifiedAt.HasValue ? Model.Task.ModifiedAt.Value.ToString( "o" ) : "")<br />
+Status: @(Model.Task.AssigneeStatus.HasValue ? Model.Task.AssigneeStatus.Value.ToString() : "")<br />
+@(Model.Task.Completed ? "Compeleted At: " + Model.Task.CompletedAt.Value.ToString( "o" ) : " ... In Progress ... ")<br/>
+<br />
+@foreach( var story in Model.Stories )
+{
+	<div>
+		@(story.CreatedAt.ToString("o")) - @(story.Text)<br />
+		Target: @(story.Target.Name)<br />
+		By: @(story.CreatedBy.Name)<br />
+		<em>Source: @(story.Source.Value) - Type: @(story.Type.Value)</em>
+	</div>
+	<br />
+}

@@ -1,0 +1,58 @@
+@model  Website.Models.Users.UsersListModel
+@{
+	ViewBag.Title = "Asana API ";
+}
+
+@section featured {
+<section class="featured">
+	<div class="content-wrapper">
+		<hgroup class="title">
+			<h1>@ViewBag.Title.</h1>
+			<h2>@ViewBag.Message</h2>
+		</hgroup>
+	</div>
+</section>
+}
+Hello there <em>@(Website.Shared.Me.Name)</em>.<br />
+These are all your Users.
+
+<ul>
+@if( @Model.ShowCompleteUserDetails )
+{
+	foreach( var user in Model.WorkspaceUsers )
+	{
+		<li data-user-id="@(user.Id)">
+			<div>
+				Name: @(user.Name)<br />
+				Email: @(user.Email) <br />
+				Workspace Count: @(user.Workspaces == null ? "0" : user.Workspaces.Length.ToString())<br />
+				<ul>
+				@foreach( var workspace in user.Workspaces )
+	{
+		<li data-user-workspace-id="@(workspace.Id)">@(workspace.Name)</li>
+	}
+	</ul>
+			</div>
+		</li>
+	 }
+}
+else
+{
+	foreach( var user in Model.WorkspaceUsers )
+	{
+		<li data-user-id="@(user.Id)">@(user.Name)</li>
+	}
+}
+</ul>
+
+<br />
+@if( Model.ShowCompleteUserDetails == false )
+{ 
+	@:Want to see more details for these users? @Html.ActionLink( "Click Here", "Index", new { option = "True" }, null ).
+}
+else
+{
+	@:Hide the details for these users? <a href="/Users">Click Here</a>.
+}
+<br />
+
