@@ -34,7 +34,8 @@ namespace Website
 			RegisterGlobalFilters( GlobalFilters.Filters );
 			RegisterRoutes( RouteTable.Routes );
 
-			BundleTable.Bundles.RegisterTemplateBundles();
+			//BundleTable.Bundles.RegisterTemplateBundles();
+			BundleTable.Bundles.EnableDefaultBundles();
 
 			Shared.Me = new AsanaApi.Service.UsersService( Shared.API_KEY ).GetUser();
 			Shared.Projects = new AsanaApi.Service.ProjectsService( Shared.API_KEY ).GetProjects(

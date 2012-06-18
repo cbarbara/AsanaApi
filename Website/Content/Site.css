@@ -96,13 +96,8 @@ h5, h6 {
 }
 
     .main-content {
-        background: url("../Images/accent.png") no-repeat;
         padding-left: 10px;
         padding-top: 30px;
-    }
-
-    .featured + .main-content {
-        background: url("../Images/heroAccent.png") no-repeat;
     }
 
 footer {
@@ -248,18 +243,6 @@ ol.round {
         padding-left: 45px;
     }
 
-        ol.round li.one {
-            background: url("../Images/orderedListOne.png") no-repeat;
-        }
-
-        ol.round li.two {
-            background: url("../Images/orderedListTwo.png") no-repeat;
-        }
-
-        ol.round li.three {
-            background: url("../Images/orderedListThree.png") no-repeat;
-        }
-
 /* content */
 article {
     float: left;
@@ -277,7 +260,6 @@ aside {
     }
 
         aside ul li {
-            background: url("../Images/bullet.png") no-repeat 0 50%;
             padding: 2px 0 2px 20px;
         }
 
@@ -449,14 +431,6 @@ ul#social li {
         padding-left: 17px;
         text-indent: -9999px;
         width: 16px;
-    }
-
-    a.facebook {
-        background: url("../Images/facebook.png") no-repeat;
-    }
-
-    a.twitter {
-        background: url("../Images/twitter.png") no-repeat;
     }
 
 
