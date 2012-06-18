@@ -1,0 +1,35 @@
+@model  Website.Models.BusyWeek.BusyWeekModel
+@{
+	ViewBag.Title = "Asana API";
+}
+
+@section featured {
+<section class="featured">
+	<div class="content-wrapper">
+		<hgroup class="title">
+			<h1>@ViewBag.Title.</h1>
+			<h2>@ViewBag.Message</h2>
+		</hgroup>
+	</div>
+</section>
+}
+
+<div id="date-range">
+	Start Date: @(Model.StartDate.ToShortDateString())<br />
+	End Date: @(Model.EndDate.ToShortDateString())
+</div>
+<div id="workspaces"></div>
+<div id="tasks"></div>
+<div id="sacTasks"></div>
+<div id="cTasks"></div>
+<div id="sTasks"></div>
+
+@section footerScripts {
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var startDate = "@(Model.StartDate.ToShortDateString())";
+			var endDate = "@(Model.EndDate.ToShortDateString())";
+			BusyWeek.init(startDate,endDate);
+		});
+	</script>
+}
