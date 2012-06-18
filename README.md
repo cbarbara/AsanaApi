@@ -1,6 +1,6 @@
 AsanaApi
 ========
-.NET wrapper around the Asana Api
+.NET wrapper around the Asana Api (http://developers.asana.com/documentation/).
 
 ## Install / configure
 1. use NuGet to download all the required packages (MVC4 dependancies + mbunit)
