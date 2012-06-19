@@ -29,13 +29,13 @@ namespace Website.Controllers
 
 		private void FindWeekRange( out DateTime startOfWeek, out DateTime endOfWeek )
 		{
-			DateTime now = DateTime.UtcNow.Date;
-			while( now.DayOfWeek != DayOfWeek.Sunday )
-			{
-				now = now.AddDays( -1 );
-			}
+			DateTime now = DateTime.UtcNow.Date; //new DateTime( 2012, 6, 17 );
+			////while( now.DayOfWeek != DayOfWeek.Sunday )
+			////{
+			////    now = now.AddDays( -1 );
+			////}
 			endOfWeek = now;
-			startOfWeek = endOfWeek.AddDays( -7 );
+			startOfWeek = endOfWeek.AddDays( -7 );//-17 );
 		}
 
 
@@ -50,7 +50,8 @@ namespace Website.Controllers
 		{
 			TasksService tasksService = new TasksService( Shared.API_KEY );
 			List<Task> allTasks = new List<Task>();
-			Task[] tasks = null,
+			Task[] tasks = null;
+			BusyTask[] startedAndCompleted = null,
 				started = null,
 				completed = null;
 			
@@ -63,18 +64,18 @@ namespace Website.Controllers
 				}
 			}
 
-			GetTasks( DateTime.Parse( data.Start ), DateTime.Parse( data.End ), allTasks, out tasks, out started, out completed );
+			GetTasks( DateTime.Parse( data.Start ), DateTime.Parse( data.End ), allTasks, out startedAndCompleted, out started, out completed );
 
 			TasksSearchResults results = new TasksSearchResults()
 			{
 				StartedDuringRange = started,
 				CompletedDuringRange = completed,
-				StartedAndCompletedDuringRange = tasks
+				StartedAndCompletedDuringRange = startedAndCompleted
 			};
 			return Json( results );
 		}
 
-		private void GetTasks( DateTime startDateUtc, DateTime endDateUtc, List<Task> allTasks, out Task[] startedAndCompleted, out Task[] started, out Task[] completed )
+		private void GetTasks( DateTime startDateUtc, DateTime endDateUtc, List<Task> allTasks, out BusyTask[] startedAndCompleted, out BusyTask[] started, out BusyTask[] completed )
 		{
 			endDateUtc = endDateUtc.AddDays( 1 );
 
@@ -82,9 +83,9 @@ namespace Website.Controllers
 			started = null;
 			completed = null;
 
-			List<Task> startedTasks = new List<Task>(),
-				completedTasks = new List<Task>(),
-				startedAndCompletedTasks = new List<Task>();
+			List<BusyTask> startedTasks = new List<BusyTask>(),
+				completedTasks = new List<BusyTask>(),
+				startedAndCompletedTasks = new List<BusyTask>();
 
 			foreach( var t in allTasks )
 			{
@@ -94,11 +95,11 @@ namespace Website.Controllers
 					{
 						if( t.CreatedAt >= startDateUtc && t.CompletedAt.Value < endDateUtc )
 						{
-							startedAndCompletedTasks.Add( t );
+							startedAndCompletedTasks.Add( new BusyTask( t ) );
 						}
 						else if( t.CompletedAt.Value < endDateUtc )
 						{
-							completedTasks.Add( t );
+							completedTasks.Add( new BusyTask( t ) );
 						}
 					}
 				}
@@ -106,7 +107,7 @@ namespace Website.Controllers
 				{
 					if( t.CreatedAt >= startDateUtc )
 					{
-						startedTasks.Add( t );
+						startedTasks.Add( new BusyTask( t ) );
 					}
 				}
 			}

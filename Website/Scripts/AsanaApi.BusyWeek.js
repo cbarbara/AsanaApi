@@ -3,6 +3,10 @@
 	var _endDate = null;
 	var _workspaces = new Array();
 
+	function _parseDate(aspNetMvcDate) {
+		return new Date(parseInt(aspNetMvcDate.substr(6)));
+	}
+
 	function _onWorkspacesFound(result) {
 		var wsDiv = $("#workspaces");
 		var content = "<br/><span>Workspaces being searched for Tasks:</span><ul>";
@@ -32,32 +36,44 @@
 		});
 	}
 	function _onTasksFound(result) {
-		console.log(result.CompletedDuringRange);
-		console.log(result.StartedAndCompletedDuringRange);
-		console.log(result.StartedDuringRange);
-
 		$("#tasks").children().remove();
 
 		if (result.CompletedDuringRange == null) {
-			$("#cTasks").html("<em>none</em>");
+			$("#cTasks").html("No tasks created before the start date and completed in this time range.<br/>");
 		}
 		else {
-			$("#cTasks").html(result.CompletedDuringRange.length);
+			$("#cTasks").html(_renderTasks(result.CompletedDuringRange, " tasks created before the start date and completed in this time range."));
 		}
 
 		if (result.StartedDuringRange == null) {
-			$("#sTasks").html("<em>none</em>");
+			$("#sTasks").html("No tasks created in this time range, but not yet completed.<br/>");
 		}
 		else {
-			$("#sTasks").html(result.StartedDuringRange.length);
+			$("#sTasks").html(_renderTasks(result.StartedDuringRange, " tasks created in this time range, but not yet completed."));
 		}
 
 		if (result.StartedAndCompletedDuringRange == null) {
-			$("#sacTasks").html("<em>none</em>");
+			$("#sacTasks").html("No tasks created and completed in this time range.<br/>");
 		}
 		else {
-			$("#sacTasks").html(result.StartedAndCompletedDuringRange.length);
+			$("#sacTasks").html(_renderTasks(result.StartedAndCompletedDuringRange, " tasks created and completed in this time range."));
 		}
+	}
+	function _renderTasks(tasks, message) {
+		var content = "<span>" + tasks.length.toString() + message + "</span><ul>";
+		for (var i = 0; i < tasks.length; i++) {
+			content += "<li><div>" + tasks[i].Name + "<br/>";
+			content += "Started: " + _parseDate(tasks[i].CreatedAt) + "<br/>";
+			if (tasks[i].TimeTaken != null) {
+				content += "Finished: " + _parseDate(tasks[i].CompletedAt) + "<br/>";
+				content += "Time taken: " + tasks[i].TimeTaken;
+			}
+			else {
+				content += "Unfinished For: " + tasks[i].CurrentRunTime;
+			}
+			content += "</div></li>";
+		}
+		return content + "</ul>";
 	}
 
 	return {
